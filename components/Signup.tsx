@@ -1,4 +1,5 @@
 "use client"
+import { signup } from "@/app/actions/user";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEventHandler, useState } from "react";
@@ -8,11 +9,11 @@ export function Signup() {
     const [password, setPassword] = useState("");
     const router = useRouter();
 
-    return <div className="h-screen flex justify-center flex-col">
+    return <div className="h-screen flex justify-center flex-col  background-clip bg-gradient-to-tr from-gray-500 via-gray-600 to-black ">
         <div className="flex justify-center">
                 <div>
                     <div className="px-10">
-                        <div className="text-3xl font-extrabold">
+                        <div className="text-3xl font-extrabold text-white">
                             Sign up
                         </div>
                     </div>
@@ -23,13 +24,7 @@ export function Signup() {
                         <LabelledInput onChange={(e) => {
                             setPassword(e.target.value)
                         }} label="Password" type={"password"} placeholder="123456" />
-                        <button onClick={async () => {
-                                 await axios.post("http://localhost:8080/api/user", {
-                                username,
-                                password
-                            });
-                            router.push("/")
-                        }} type="button" className="mt-8 w-full text-white bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Sign in</button>
+                        <button onClick={()=>signup(username,password)} type="button" className="mt-8 w-full text-white bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Sign in</button>
                     </div>
                 </div>
        
@@ -40,7 +35,7 @@ export function Signup() {
 
 function LabelledInput({ label, placeholder, type, onChange }: LabelledInputType) {
     return <div>
-        <label className="block mb-2 text-sm text-black font-semibold pt-4">{label}</label>
+        <label className="block mb-2 text-sm text-white font-semibold pt-4">{label}</label>
         <input onChange={onChange} type={type || "text"} id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} required />
     </div>
 }
